@@ -52,22 +52,14 @@ const servicioTecnicoSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  observaciones: {
-    type: String
-  },
-  resolucion: {
-    type: String
-  },
+  observaciones: String,
+  resolucion: String,
   tipoResolucion: {
     type: String,
     enum: ['Devolución', 'Reparación', 'Rechazo Garantía', 'Cambio']
   },
-  fechaReparacion: {
-    type: Date
-  },
-  tecnicoResolucion: {
-    type: String
-  }
+  fechaReparacion: Date,
+  tecnicoResolucion: String
 });
 
-module.exports = mongoose.model('ServicioTecnico', servicioTecnicoSchema);
+module.exports = mongoose.model('ServicioTecnico', servicioTecnicoSchema, 'serviciotecnico');

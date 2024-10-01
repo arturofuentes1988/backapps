@@ -10,11 +10,17 @@ exports.getAllServicios = async (req, res) => {
 };
 
 exports.createServicio = async (req, res) => {
-  const servicio = new ServicioTecnico(req.body);
   try {
+    const count = await ServicioTecnico.countDocuments();
+    const nuevoNumero = String(count + 1).padStart(4, '0');
+    const servicio = new ServicioTecnico({
+      ...req.body,
+      numeroServicioTecnico: nuevoNumero
+    });
     const nuevoServicio = await servicio.save();
     res.status(201).json(nuevoServicio);
   } catch (error) {
+    console.error('Error al guardar el servicio:', error);
     res.status(400).json({ message: error.message });
   }
 };
